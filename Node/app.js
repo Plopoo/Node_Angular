@@ -1,12 +1,12 @@
-let http = require('http');
-let server = http.createServer();
-let port = 8080;
+const port = 3333;
+const express = require('express');
+const app = express();
 
-server.on('request', (request, response) => {
-    
-    response.writeHead(200);
-    response.end("Coucou");
-
+app.get('/', function (req, res) {
+  res.send('Hello World!');
 });
 
-server.listen('Node is running on port : '+ port);
+app.listen(port, function () {
+  console.log('Server is running on http://localhost:' + port);
+});
+
