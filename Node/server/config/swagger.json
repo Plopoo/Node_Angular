@@ -1,0 +1,1113 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "",
+		"title": "Node API",
+		"description": "Node API"
+	},
+	"host": "62.210.209.30:3333",
+	"schemes": [
+		"http"
+	],
+	"consumes": [
+		"application/json",
+		"multipart/form-data"
+	],
+	"produces": [
+		"application/json"
+	],
+	"securityDefinitions": {
+		"Bearer": {
+			"type": "apiKey",
+			"name": "Authorization",
+			"in": "header"
+		}
+	},
+	"paths": {
+		"/oauth2/token": {
+			"post": {
+				"operationId": "POST-token",
+				"summary": "Get user token",
+				"tags": [
+					"Authentication"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/token-input"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/token-output"
+						}
+					},
+					"400": {
+						"$ref": "#/responses/trait:putResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:putResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:putResponse:404"
+					}
+				}
+			}
+		},
+		"/oauth2/refresh-token": {
+			"post": {
+				"operationId": "POST-refresh-token",
+				"summary": "Refresh token",
+				"tags": [
+					"Authentication"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/refresh-token-input"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/token-output"
+						}
+					},
+					"400": {
+						"$ref": "#/responses/trait:putResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:putResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:putResponse:404"
+					}
+				}
+			}
+		},
+		"/password-reset": {
+			"post": {
+				"operationId": "POST-password-reset",
+				"summary": "Password Reset User",
+				"tags": [
+					"Users"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/password-reset-input"
+					}
+				}],
+				"responses": {
+					"201": {
+						"$ref": "#/responses/trait:postResponse:201"
+					},
+					"400": {
+						"$ref": "#/responses/trait:postResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:postResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:postResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+
+		"/login": {
+			"post": {
+				"operationId": "POST-login",
+				"summary": "Login User",
+				"tags": [
+					"Users"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/login-create-input"
+					}
+				}],
+				"responses": {
+					"201": {
+						"$ref": "#/responses/trait:postResponse:201"
+					},
+					"400": {
+						"$ref": "#/responses/trait:postResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:postResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:postResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+		"/customers": {
+			"get": {
+				"operationId": "LIST-customers",
+				"summary": "List Customers",
+				"tags": [
+					"Customers"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/customer-output"
+							}
+						}
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			},
+			"post": {
+				"operationId": "POST-customer",
+				"summary": "Create Customer",
+				"tags": [
+					"Customers"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/customer-create-input"
+					}
+				}],
+				"responses": {
+					"201": {
+						"$ref": "#/responses/trait:postResponse:201"
+					},
+					"400": {
+						"$ref": "#/responses/trait:postResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:postResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:postResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+
+		"/customers/{customer_id}": {
+			"parameters": [{
+				"name": "customer_id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}],
+			"get": {
+				"operationId": "GET-customer",
+				"summary": "Get Customer",
+				"tags": [
+					"Customers"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"$ref": "#/responses/trait:getResponse:200"
+					},
+					"400": {
+						"$ref": "#/responses/trait:getResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:getResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:getResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			},
+			"put": {
+				"operationId": "PUT-customer",
+				"summary": "Update Customer",
+				"tags": [
+					"Customers"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/customer-input"
+					}
+				}],
+				"responses": {
+					"200": {
+						"$ref": "#/responses/trait:putResponse:200"
+					},
+					"400": {
+						"$ref": "#/responses/trait:putResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:putResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:putResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			},
+			"delete": {
+				"operationId": "DELETE-customer",
+				"summary": "Delete Customer",
+				"tags": [
+					"Customers"
+				],
+				"responses": {
+					"204": {
+						"$ref": "#/responses/trait:deleteResponse:204"
+					},
+					"400": {
+						"$ref": "#/responses/trait:deleteResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:deleteResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:deleteResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+
+		"/users": {
+			"get": {
+				"operationId": "LIST-users",
+				"summary": "List Users",
+				"tags": [
+					"Users"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/user-output"
+							}
+						}
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			},
+			"post": {
+				"operationId": "POST-user",
+				"summary": "Create User",
+				"tags": [
+					"Users"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/user-create-input"
+					}
+				}],
+				"responses": {
+					"201": {
+						"$ref": "#/responses/trait:postResponse:201"
+					},
+					"400": {
+						"$ref": "#/responses/trait:postResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:postResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:postResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+		"/users/{user_id}": {
+			"parameters": [{
+				"name": "user_id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}],
+			"get": {
+				"operationId": "GET-user",
+				"summary": "Get User",
+				"tags": [
+					"Users"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"$ref": "#/responses/trait:getResponse:200"
+					},
+					"400": {
+						"$ref": "#/responses/trait:getResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:getResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:getResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			},
+			"put": {
+				"operationId": "PUT-user",
+				"summary": "Update User",
+				"tags": [
+					"Users"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/user-input"
+					}
+				}],
+				"responses": {
+					"200": {
+						"$ref": "#/responses/trait:putResponse:200"
+					},
+					"400": {
+						"$ref": "#/responses/trait:putResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:putResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:putResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			},
+			"delete": {
+				"operationId": "DELETE-user",
+				"summary": "Delete User",
+				"tags": [
+					"Users"
+				],
+				"responses": {
+					"204": {
+						"$ref": "#/responses/trait:deleteResponse:204"
+					},
+					"400": {
+						"$ref": "#/responses/trait:deleteResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:deleteResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:deleteResponse:404"
+					}
+				}
+			}
+		},
+		"/users/role/{role}": {
+			"parameters": [{
+				"name": "role",
+				"in": "path",
+				"required": true,
+				"type": "string"
+			}],
+			"get": {
+				"operationId": "GET-user-by-role",
+				"summary": "Get User By Role",
+				"tags": [
+					"Users"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"$ref": "#/responses/trait:getResponse:200"
+					},
+					"400": {
+						"$ref": "#/responses/trait:getResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:getResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:getResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+		"/users/role/{role}/{user_id}": {
+			"parameters": [{
+					"name": "role",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "user_id",
+					"in": "path",
+					"required": true,
+					"type": "integer"
+				}
+			],
+			"get": {
+				"operationId": "GET-user-by-role-by-user_id",
+				"summary": "Get User By Role",
+				"tags": [
+					"Users"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"$ref": "#/responses/trait:getResponse:200"
+					},
+					"400": {
+						"$ref": "#/responses/trait:getResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:getResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:getResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+		"/me": {
+			"parameters": [],
+			"get": {
+				"operationId": "GET-me",
+				"summary": "Get me",
+				"tags": [
+					"Users"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/user-output"
+						}
+					},
+					"400": {
+						"$ref": "#/responses/trait:getResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:getResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:getResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			},
+			"put": {
+				"operationId": "PUT-me",
+				"summary": "Update Me",
+				"tags": [
+					"Users"
+				],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"schema": {
+						"$ref": "#/definitions/user-input"
+					}
+				}],
+				"responses": {
+					"200": {
+						"$ref": "#/responses/trait:putResponse:200"
+					},
+					"400": {
+						"$ref": "#/responses/trait:putResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:putResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:putResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		},
+		"/me/client": {
+			"parameters": [],
+			"get": {
+				"operationId": "GET-me-client",
+				"summary": "Get me",
+				"tags": [
+					"Users Client Interface"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/user-output"
+						}
+					},
+					"400": {
+						"$ref": "#/responses/trait:getResponse:400"
+					},
+					"403": {
+						"$ref": "#/responses/trait:getResponse:403"
+					},
+					"404": {
+						"$ref": "#/responses/trait:getResponse:404"
+					}
+				},
+				"security": [{
+					"Bearer": []
+				}]
+			}
+		}
+	},
+	"responses": {
+		"trait:deleteResponse:204": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:deleteResponse:400": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:deleteResponse:403": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:deleteResponse:404": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:getResponse:200": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:getResponse:400": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:getResponse:403": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:getResponse:404": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:postResponse:201": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:postResponse:400": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:postResponse:403": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:postResponse:404": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:putResponse:200": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:putResponse:400": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:putResponse:403": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		},
+		"trait:putResponse:404": {
+			"description": "",
+			"schema": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/error-response"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"error-response": {
+			"title": "Error response",
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string"
+				},
+				"field": {
+					"type": "string"
+				},
+				"value": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"message"
+			]
+		},
+		"customer-input": {
+			"title": "Customer Create Input",
+			"type": "object",
+			"properties": {
+				"firstname": {
+					"type": "string"
+				},
+				"lastname": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"user_id": {
+					"type": "integer"
+				}
+			}
+		},
+		"customer-create-input": {
+			"title": "Customer Create Input",
+			"type": "object",
+			"properties": {
+				"firstname": {
+					"type": "string"
+				},
+				"lastname": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"user_id": {
+					"type": "integer"
+				}
+			},
+			"required": [
+				"email"
+			]
+		},
+		"customer-output": {
+			"title": "Customer Output",
+			"type": "object",
+			"properties": {
+				"firstname": {
+					"type": "string"
+				},
+				"lastname": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"user_id": {
+					"type": "integer"
+				}
+			}
+		},
+		"password-reset-input": {
+			"title": "Password Reset Input",
+			"type": "object",
+			"properties": {
+				"email": {
+					"type": "string",
+					"format": "email"
+				}
+			},
+			"required": [
+				"email"
+			]
+		},
+		"login-create-input": {
+			"title": "Login User Input",
+			"type": "object",
+			"properties": {
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"password": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"email",
+				"password"
+			]
+		},
+		"user-input": {
+			"title": "User Input",
+			"type": "object",
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"password": {
+					"type": "string"
+				},
+				"password_repeat": {
+					"type": "string"
+				}
+			}
+		},
+		"user-output": {
+			"title": "User Output",
+			"type": "object",
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"role": {
+					"type": "string"
+				}
+			}
+		},
+		"user-create-input": {
+			"title": "User Create Input",
+			"type": "object",
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"password": {
+					"type": "string"
+				},
+				"password_repeat": {
+					"type": "string"
+				},
+				"role": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"username",
+				"email"
+			]
+		},
+		"token-input": {
+			"title": "Token Input",
+			"type": "object",
+			"properties": {
+				"client_id": {
+					"type": "string"
+				},
+				"client_secret": {
+					"type": "string"
+				},
+				"grant_type": {
+					"type": "string"
+				},
+				"username": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			}
+		},
+		"refresh-token-input": {
+			"title": "Refresh Token Input",
+			"type": "object",
+			"properties": {
+				"client_id": {
+					"type": "string"
+				},
+				"client_secret": {
+					"type": "string"
+				},
+				"grant_type": {
+					"type": "string"
+				},
+				"refresh_token": {
+					"type": "string"
+				}
+			}
+		},
+		"token-output": {
+			"title": "Token Output",
+			"type": "object",
+			"properties": {
+				"access_token": {
+					"type": "string"
+				},
+				"token_type": {
+					"type": "string"
+				},
+				"expires_in": {
+					"type": "integer"
+				},
+				"refresh_token": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
