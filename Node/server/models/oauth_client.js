@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         client_secret: {
             type:DataTypes.STRING,
             allowNull: false
-        },
-        redirect_uri: DataTypes.STRING
+        }
     }, {});
     oauth_client.associate = function(models) {
         // associations can be defined here

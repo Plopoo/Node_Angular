@@ -71,9 +71,6 @@ module.exports = (sequelize, DataTypes) => {
 		});
 	};
 
-	// AllowedFields for Notifications
-	user.prototype.allowedFields = ['username', 'email']
-
 	// Methods
 	user.prototype.hasRole = function (role) {
 		return this.role === role;

@@ -43,14 +43,11 @@ launchServer(function () {
 
 			// Create server
 			let server = restify.createServer({});
-			server.use(logger('dev'));
+			server.use(logger('dev'));	
 
 			// Init globals
 			global = require('./server/config/globals')(server);
 
-			// validation middleware requires query and body parser to be used,
-			// both have to disable mapping their properties into req.params
-			// so req.params only contains the route path parameters.
 			server.use(restify.plugins.bodyParser({ mapParams: false }));
 			server.use(restify.plugins.queryParser({ mapParams: false }));
 			server.use(restifySwaggerValidationMiddleware(swaggerAPI, {}));

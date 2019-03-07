@@ -1,3 +1,4 @@
+'use strict';
 require('app-module-path').addPath(__dirname + '/..');
 const MODELS = require('models/index');
 
@@ -12,7 +13,8 @@ module.exports = {
                 return MODELS.customer.create({
                     firstname: 'firstname',
                     lastname: 'lastname',
-                    email: 'test@gmail.com'
+                    email: 'test@gmail.com',
+                    user_id: 2
                 })
             })
         }));

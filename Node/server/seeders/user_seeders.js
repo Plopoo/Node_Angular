@@ -1,5 +1,5 @@
+'use strict';
 require('app-module-path').addPath(__dirname + '/..');
-
 const MODELS = require('models/index');
 const bcrypt = require('bcrypt-nodejs')
 const CRYPT_CONFIG = require('../config/crypt');
@@ -9,12 +9,12 @@ module.exports = {
         let sequelize = queryInterface.sequelize
 
         let promises = []
+
         promises.push(new Promise(function(resolve, reject){
-            MODELS.sequelize.transaction((t)=>{
+            return MODELS.sequelize.transaction((t)=>{
                 return MODELS.oauth_client.create({
-                    client_id: 'client_id_1',
-                    client_secret: 'client_secret',
-                    redirect_uri: 'redirect_uri',
+                    client_id: 'client_1',
+                    client_secret: 'client_secret'
                 }, {transaction:t }).then((client) => {
                     return MODELS.user.create({
                         username: 'User',
@@ -31,7 +31,9 @@ module.exports = {
                             refresh_token_expire_date: new Date(),
                             user_id: user.get('id'),
                             client_id: client.get('id')
-                        }, {transaction:t });
+                        }, {
+                            transaction:t 
+                        });
                     });
                 });
             }).then(token=>{
@@ -42,11 +44,10 @@ module.exports = {
             });
         }));
         promises.push(new Promise(function(resolve, reject){
-            MODELS.sequelize.transaction((t) => {
+            return MODELS.sequelize.transaction((t) => {
                 return MODELS.oauth_client.create({
-                    client_id: 'client_id_2',
-                    client_secret: 'client_secret',
-                    redirect_uri: 'redirect_uri',
+                    client_id: 'client_2',
+                    client_secret: 'client_secret'
                 }, {
                     transaction: t
                 }).then((client) => {
@@ -77,10 +78,11 @@ module.exports = {
                 })
             });
         }));
-        return Promise.all(promises).then(function(){
+
+        return Promise.all(promises).then(function () {
             done()
         })
-       
+
     },
 
     down: (queryInterface, Sequelize) => {
